@@ -418,6 +418,8 @@ body[data-theme="dark"] .event-card-row {
 """, unsafe_allow_html=True)
 
             for event in recent_events:
+                svg_recurrence = "<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#00B4D8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><path d='M12 6v6l4 2'/></svg>"
+                svg_email = "<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='#00B4D8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='20' height='14' rx='2' ry='2'/><path d='M16 3v4'/><path d='M8 3v4'/></svg> Reminder enabled"
                 st.markdown(f"""
 <div class='event-card-row'>
   <div style='flex:2;min-width:0;display:flex;flex-direction:column;'>
@@ -433,10 +435,10 @@ body[data-theme="dark"] .event-card-row {
     {format_datetime(event['end_time'])}
   </div>
   <div class='event-card-cell'>
-    {('<svg width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'#00B4D8\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><path d=\'M12 6v6l4 2\'/></svg>' + str(event['recurrence'])) if event.get('recurrence') else ''}
+    {(svg_recurrence + str(event['recurrence'])) if event.get('recurrence') else ''}
   </div>
   <div class='event-card-cell'>
-    {('<svg width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'#00B4D8\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><rect x=\'2\' y=\'7\' width=\'20\' height=\'14\' rx=\'2\' ry=\'2\'/><path d=\'M16 3v4\'/><path d=\'M8 3v4\'/></svg> Reminder enabled') if event.get('email') else ''}
+    {svg_email if event.get('email') else ''}
   </div>
 </div>
 """, unsafe_allow_html=True)
